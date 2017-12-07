@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index-SoyM</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/amazeui.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}"/>
+    <style>
+        .get {
+            background: #1E5B94;
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .get-title {
+            font-size: 200%;
+            border: 2px solid #fff;
+            padding: 20px;
+            display: inline-block;
+        }
+
+        .get-btn {
+            background: #fff;
+        }
+
+        .detail {
+            background: #fff;
+        }
+
+        .detail-h2 {
+            text-align: center;
+            font-size: 150%;
+            margin: 40px 0;
+        }
+
+        .detail-h3 {
+            color: #1f8dd6;
+        }
+
+        .detail-p {
+            color: #7f8c8d;
+        }
+
+        .detail-mb {
+            margin-bottom: 30px;
+        }
+
+        .hope {
+            background: #0bb59b;
+            padding: 50px 0;
+        }
+
+        .hope-img {
+            text-align: center;
+        }
+
+        .hope-hr {
+            border-color: #149C88;
+        }
+
+        .hope-title {
+            font-size: 140%;
+        }
+
+        .about {
+            background: #fff;
+            padding: 40px 0;
+            color: #7f8c8d;
+        }
+
+        .about-color {
+            color: #34495e;
+        }
+
+        .about-title {
+            font-size: 180%;
+            padding: 30px 0 50px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            margin: 0;
+            padding: 15px 0;
+            text-align: center;
+            background: #2d3e50;
+        }
+    </style>
+</head>
+<body>
+<header class="am-topbar am-topbar-fixed-top">
+    <div class="am-container">
+        <h1 class="am-topbar-brand">
+            <a href="">SoyM</a>
+        </h1>
+    </div>
+</header>
+
+{#{% if latest_paper_list %}#}
+{#    <ul>#}
+{#        {% for paper in latest_paper_list %}#}
+{#            <li><a href="{% url 'red:detail' paper.id %}">{{ paper.title }}</a></li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>No polls are available.</p>#}
+{#{% endif %}#}
+
+<div class="get">
+    <div class="am-g">
+        <div class="am-u-lg-12">
+            <h1 class="get-title">I am SoyM</h1>
+        </div>
+    </div>
+</div>
+
+<div class="detail">
+    <div class="am-g am-container">
+        <div class="am-u-lg-12">
+            <h2 class="detail-h2">Let's do it</h2>
+
+            <div class="am-g">
+                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-cogs am-icon-sm"></i>
+                        Controller
+                    </h3>
+                    <p class="detail-p">
+                        Controller Panel
+                    </p>
+                </div>
+
+                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-check-square-o am-icon-sm"></i>
+                        Post
+                    </h3>
+                    <p class="detail-p">
+                        Thought
+                    </p>
+                </div>
+                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
+                    <h3 class="detail-h3">
+                        <i class="am-icon-send-o am-icon-sm"></i>
+                        Project
+                    </h3>
+                    <p class="detail-p">
+                        Cool!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/amazeui.js' %}"></script>
+</body>
+</html>
