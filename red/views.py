@@ -14,3 +14,18 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Paper
     template_name = 'red/detail.html'
+
+
+class PanelView(generic.ListView):
+    model = Paper
+    template_name = 'red/panel.html'
+
+
+class PostView(generic.ListView):
+    model = Paper
+    template_name = 'red/post.html'
+
+
+class ProjectView(generic.ListView):
+    model = Paper
+    template_name = 'red/project.html'
