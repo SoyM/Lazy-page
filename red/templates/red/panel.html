@@ -1,11 +1,10 @@
 {% extends "red/base.html" %}
 {% block title %}Controller panel{% endblock %}
+{% load static %}
+{% block extrastyle %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+{% endblock %}
 {% block content %}
-    {% load static %}
-    {% block extrastyle %}
-        <script src="{% static 'js/echarts.min.js' %}"></script>
-    {% endblock %}
-
     <div class="tpl-page-container tpl-page-header-fixed">
         <div class="tpl-left-nav tpl-left-nav-hover">
             <div class="tpl-left-nav-title">
@@ -875,6 +874,4 @@
             </div>
         </div>
     </div>
-    <script src="{% static '/js/iscroll.js' %}"></script>
-    <script src="{% static '/js/app.js' %}"></script>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% load i18n static %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<head>
+<head class="am-touch js cssanimations">
     <title>{% block title %}{% endblock %}</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
     <meta name="renderer" content="webkit">
     {% load static %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
-    <link rel="stylesheet" href="{% static 'css/amazeui.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/app.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
     {% block extrastyle %}{% endblock %}
@@ -37,45 +37,43 @@
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
-                    <span class="am-icon-bell-o"></span> 提醒 <span
-                        class="am-badge tpl-badge-success am-round">5</span></span>
+                    <span class="am-icon-bell-o"></span> Message <span
+                        class="am-badge tpl-badge-success am-round">3</span></span>
                 </a>
                 <ul class="am-dropdown-content tpl-dropdown-content">
                     <li class="tpl-dropdown-content-external">
-                        <h3>你有 <span class="tpl-color-success">5</span> 条提醒</h3><a href="###">全部</a></li>
+                        <h3>There are<span class="tpl-color-success">3</span> messages</h3><a href="#">Get all</a></li>
                     <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
                             class="am-icon-btn am-icon-plus tpl-dropdown-ico-btn-size tpl-badge-success"></span>
-                        【预览模块】移动端 查看时 手机、电脑框隐藏。</a>
-                        <span class="tpl-dropdown-list-fr">3小时前</span>
+                        example1</a>
+                        <span class="tpl-dropdown-list-fr">3 hours age</span>
                     </li>
                     <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
                             class="am-icon-btn am-icon-check tpl-dropdown-ico-btn-size tpl-badge-danger"></span>
-                        移动端，导航条下边距处理</a>
-                        <span class="tpl-dropdown-list-fr">15分钟前</span>
+                        example2</a>
+                        <span class="tpl-dropdown-list-fr">15 minutes ago</span>
                     </li>
                     <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
                             class="am-icon-btn am-icon-bell-o tpl-dropdown-ico-btn-size tpl-badge-warning"></span>
-                        追加统计代码</a>
-                        <span class="tpl-dropdown-list-fr">2天前</span>
+                        example3</a>
+                        <span class="tpl-dropdown-list-fr">2 days ago</span>
                     </li>
                 </ul>
             </li>
             <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"
                                            class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span>
-                <span class="admin-fullText">开启全屏</span></a></li>
+                <span class="admin-fullText">Full screen</span></a></li>
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">禁言小张</span><span class="tpl-header-list-user-ico"> <img
+                    <span class="tpl-header-list-user-nick">SoyM</span><span class="tpl-header-list-user-ico"> <img
                         src=""></span>
                 </a>
                 <ul class="am-dropdown-content">
-                    <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
-                    <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-                    <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                    <li><a href="#"><span class="am-icon-power-off"></span> exit</a></li>
                 </ul>
             </li>
-            <li><a href="###" class="tpl-header-list-link"><span
+            <li><a href="#" class="tpl-header-list-link"><span
                     class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
         </ul>
     </div>
@@ -85,6 +83,8 @@
 {% endblock %}
 
 <script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/amazeui.js' %}"></script>
+<script src="{% static 'js/amazeui.min.js' %}"></script>
+<script src="{% static 'js/iscroll.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>
