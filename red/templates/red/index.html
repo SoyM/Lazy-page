@@ -1,15 +1,5 @@
 {% extends "red/base.html" %}
-
-
-{#{% if latest_paper_list %}#}
-{#    <ul>#}
-{#        {% for paper in latest_paper_list %}#}
-{#            <li><a href="{% url 'red:detail' paper.id %}">{{ paper.title }}</a></li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-{#{% else %}#}
-{#    <p>No polls are available.</p>#}
-{#{% endif %}#}
+{% block title %}Index{% endblock %}
 {% block content %}
 <div class="get">
     <div class="am-g">
@@ -23,7 +13,6 @@
     <div class="am-g am-container">
         <div class="am-u-lg-12">
             <h2 class="detail-h2">Let's do it</h2>
-
             <div class="am-g">
                 <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
                     <a href="{% url 'red:panel' %}">
@@ -36,7 +25,6 @@
                         Controller Panel
                     </p>
                 </div>
-
                 <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
                     <a href="{% url 'red:post' %}">
                         <h3 class="detail-h3">

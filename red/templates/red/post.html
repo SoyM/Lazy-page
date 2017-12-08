@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>post</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "red/base.html" %}
+{% block title %}Post{% endblock %}
+{% block content %}
+{% if latest_paper_list %}
+    <ul>
+        {% for paper in latest_paper_list %}
+            <li><a href="{% url 'red:detail' paper.id %}">{{ paper.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Papers are available.</p>
+{% endif %}
+{% endblock %}
