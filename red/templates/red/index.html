@@ -1,54 +1,54 @@
 {% extends "red/base.html" %}
 {% block title %}Index{% endblock %}
 {% block content %}
-<div class="get">
-    <div class="am-g">
-        <div class="am-u-lg-12">
-            <h1 class="get-title">I am SoyM</h1>
+    <div class="get">
+        <div class="am-g">
+            <div class="am-u-lg-12">
+                <h1 class="get-title">I am SoyM</h1>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="detail">
-    <div class="am-g am-container">
-        <div class="am-u-lg-12">
-            <h2 class="detail-h2">Let's do it</h2>
-            <div class="am-g">
-                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
-                    <a href="{% url 'red:panel' %}">
-                        <h3 class="detail-h3">
-                            <i class="am-icon-cogs am-icon-lg"></i>
-                            Controller
-                        </h3>
-                    </a>
-                    <p class="detail-p">
-                        Controller Panel
-                    </p>
-                </div>
-                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
-                    <a href="{% url 'red:post' %}">
-                        <h3 class="detail-h3">
-                            <i class="am-icon-plane am-icon-lg"></i>
-                            Post
-                        </h3>
-                    </a>
-                    <p class="detail-p">
-                        Thought
-                    </p>
-                </div>
-                <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 detail-mb">
-                    <a href="{% url 'red:project' %}">
-                        <h3 class="detail-h3">
-                            <i class="am-icon-rocket am-icon-lg"></i>
-                            Project
-                        </h3>
-                    </a>
-                    <p class="detail-p">
-                        Cool!
-                    </p>
+    <div class="detail">
+        <div class="am-g am-container">
+            <div class="am-u-lg-12">
+                <h2 class="detail-h2">Let's do it</h2>
+                <div class="am-g">
+                    <div class="am-u-lg-3 am-u-sm-12 am-u-lg-offset-1 detail-mb">
+                        <a href="{% url 'red:panel' %}">
+                            <h3 class="detail-h3">
+                                <i class="am-icon-cogs am-icon-lg"></i>
+                                Controller
+                            </h3>
+                        </a>
+                        <p class="detail-p">
+                            Controller Panel
+                        </p>
+                    </div>
+                    <div class="am-u-lg-3 am-u-sm-12 am-u-lg-offset-1 detail-mb">
+                        <a href="{% url 'red:post' %}">
+                            <h3 class="detail-h3">
+                                <i class="am-icon-plane am-icon-lg"></i>
+                                Post
+                            </h3>
+                        </a>
+                        <p class="detail-p">
+                            Thought
+                        </p>
+                    </div>
+                    <div class="am-u-lg-3 am-u-sm-12 am-u-lg-offset-1 detail-mb">
+                        <a href="{% url 'red:project' %}">
+                            <h3 class="detail-h3">
+                                <i class="am-icon-rocket am-icon-lg"></i>
+                                Project
+                            </h3>
+                        </a>
+                        <p class="detail-p">
+                            Cool!
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
