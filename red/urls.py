@@ -9,3 +9,4 @@ urlpatterns = [
     path('post/', views.PostView.as_view(), name='post'),
     path('project/', views.ProjectView.as_view(), name='project'),
 ]
+
