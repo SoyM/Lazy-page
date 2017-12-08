@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="SoyM"/>
+    <meta name="renderer" content="webkit">
     {% load static %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/amazeui.css' %}"/>
@@ -15,7 +16,8 @@
     {% block extrastyle %}{% endblock %}
 </head>
 {% load i18n %}
-<body>
+<body data-type="index">
+
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
         <a href="{% url 'red:index' %}" class="tpl-logo">
