@@ -8,5 +8,6 @@ urlpatterns = [
     path('panel/', views.PanelView.as_view(), name='panel'),
     path('post/', views.PostView.as_view(), name='post'),
     path('project/', views.ProjectView.as_view(), name='project'),
+    path('update_status/', views.update_status, name='update_status'),
 ]
 
