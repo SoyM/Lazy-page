@@ -86,7 +86,7 @@ class Connection:
 
     def __handle_ok(self):
         print("handle_ok")
-        props = self.__parse_props()
+        props = self.parse_ssdpdata()
         if not props:
             return
         if props[b'id'] != bytes(device_id, "utf-8"):
@@ -95,18 +95,18 @@ class Connection:
         print('ADDR: %s' % str(self.__addr))
         print('Find service!!!!')
         self.is_find_service = True
-        tcpConnnection = tcpConn()
+        tcpConnnection = TcpConn()
         tcpConnnection.connect()
 
     def __handle_notify(self):
         print("hadle notify")
-        props = self.__parse_props()
+        props = self.parse_ssdpdata()
         if not props:
             return
         if props[b'id'] != bytes(device_id, "utf-8"):
             return
 
-    def __parse_props(self):
+    def parse_ssdpdata(self):
         lines = self.__data.split(bytes('\r\n', "utf-8"))
         props = {}
         for i in range(1, len(lines)):
@@ -120,7 +120,7 @@ class Connection:
         return props
 
 
-class tcpConn:
+class TcpConn:
     def __init__(self):
         self.__s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -132,5 +132,5 @@ class tcpConn:
 
 
 if __name__ == '__main__':
-    port = SSDPClient()
-    port.start()
+    ssdp = SSDPClient()
+    ssdp.start()
