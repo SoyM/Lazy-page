@@ -7,9 +7,12 @@ class Paper(models.Model):
     pub_date = models.DateTimeField()
 
     def __str__(self):
-        return self.title
+        return str(self.id)
 
 
 class DeviceMiLed(models.Model):
     data = models.CharField(max_length=2000)
     update_date = models.DateTimeField()
+
+    def __str__(self):
+        return str(self.id)
