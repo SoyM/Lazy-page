@@ -40,8 +40,7 @@ def update_status(request):
     if request.method == 'POST':
         form = DeviceStatus(request.POST)
         if form.is_valid():
-            DeviceMiLed(data=request.POST.getlist('data'), update_date=datetime.now()).save()
-            return HttpResponse("Hello, world. You're at the polls index.")
+            return HttpResponse(DeviceMiLed.create(data=request.POST.getlist('data')))
         else:
             return HttpResponse('params are not valid')
     else:
