@@ -1,6 +1,7 @@
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 from .models import Paper, DeviceMiLed
 from .forms import DeviceStatus
@@ -32,10 +33,13 @@ class ProjectView(generic.TemplateView):
     template_name = 'red/project.html'
 
 
+@csrf_exempt
 def update_status(request):
     if request.method == 'POST':
         form = DeviceStatus(request.POST)
         if form.is_valid():
             return HttpResponse("Hello, world. You're at the polls index.")
+        else:
+            return HttpResponse('params are not valid')
     else:
         return HttpResponse(False)

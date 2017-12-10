@@ -6,6 +6,9 @@ class Paper(models.Model):
     content = models.CharField(max_length=2000)
     pub_date = models.DateTimeField()
 
+    def __str__(self):
+        return self.title
+
 
 class DeviceMiLed(models.Model):
     data = models.CharField(max_length=2000)
