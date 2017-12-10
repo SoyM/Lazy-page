@@ -1,7 +1,8 @@
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from datetime import datetime
 
 from .models import Paper, DeviceMiLed
 from .forms import DeviceStatus
@@ -38,6 +39,7 @@ def update_status(request):
     if request.method == 'POST':
         form = DeviceStatus(request.POST)
         if form.is_valid():
+            DeviceMiLed(data=request.POST.getlist('data'), update_date=datetime.now()).save()
             return HttpResponse("Hello, world. You're at the polls index.")
         else:
             return HttpResponse('params are not valid')

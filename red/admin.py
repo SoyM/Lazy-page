@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Paper
+from .models import Paper, DeviceMiLed
 
 
 class PaperAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'pub_date')
+    list_display = ('title', 'pub_date')
     list_filter = ['pub_date']
     search_fields = ['content']
     fieldsets = [
@@ -12,4 +12,10 @@ class PaperAdmin(admin.ModelAdmin):
     ]
 
 
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ('data', 'update_date')
+    list_filter = ['update_date']
+
+
 admin.site.register(Paper, PaperAdmin)
+admin.site.register(DeviceMiLed, DeviceAdmin)
