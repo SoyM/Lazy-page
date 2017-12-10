@@ -1,7 +1,9 @@
 from django.views import generic
-from .models import Paper, DeviceMiLed
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
+
+from .models import Paper, DeviceMiLed
+from .forms import DeviceStatus
 
 
 # @require_http_methods(["GET"])
@@ -31,9 +33,9 @@ class ProjectView(generic.TemplateView):
 
 
 def update_status(request):
-    if request.method == 'GET':
-        return HttpResponse(False)
     if request.method == 'POST':
-        form = DeviceMiLed(request.POST)
+        form = DeviceStatus(request.POST)
         if form.is_valid():
             return HttpResponse("Hello, world. You're at the polls index.")
+    else:
+        return HttpResponse(False)
