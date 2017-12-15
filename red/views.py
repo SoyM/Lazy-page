@@ -6,7 +6,7 @@ from django.shortcuts import get_list_or_404, render, get_object_or_404
 from datetime import datetime
 import json
 
-from .models import Paper, DeviceMiLed
+from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
 from .forms import DeviceStatus
 
 
@@ -33,11 +33,18 @@ class ProjectView(generic.TemplateView):
 
 
 def panel(request):
-    data_list = get_list_or_404(DeviceMiLed)
-    data = json.loads(get_object_or_404(DeviceMiLed, pk=str(data_list[len(data_list) - 1])).data)
+    miled_list = get_list_or_404(DeviceMiLed)
+    miled_data = json.loads(get_object_or_404(DeviceMiLed, pk=miled_list[len(miled_list) - 1].id).data)
+    esp_list = get_list_or_404(DeviceEspStatus)
+    esp_data = get_object_or_404(DeviceEspStatus, pk=esp_list[len(esp_list)-1].id)
 
-    return render(request, 'red/panel.html', {'power': data['power'],
-                                              'bright': data['bright']})
+    return render(request, 'red/panel.html', {'power': miled_data['power'],
+                                              'bright': miled_data['bright'],
+                                              'temperature': esp_data.temperature,
+                                              'humidity': esp_data.humidity,
+                                              'mq': esp_data.mq,
+                                              'ap_ssid': esp_data.ssid,
+                                              })
 
 
 @csrf_exempt
