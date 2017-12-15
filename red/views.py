@@ -34,10 +34,10 @@ class ProjectView(generic.TemplateView):
 
 def panel(request):
     data_list = get_list_or_404(DeviceMiLed)
-    data = get_object_or_404(DeviceMiLed, pk=str(data_list[len(data_list) - 1]))
-    print(data.data)
-    context = {'data': data_list}
-    return render(request, 'red/panel.html', context)
+    data = json.loads(get_object_or_404(DeviceMiLed, pk=str(data_list[len(data_list) - 1])).data)
+
+    return render(request, 'red/panel.html', {'power': data['power'],
+                                              'bright': data['bright']})
 
 
 @csrf_exempt
