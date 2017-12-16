@@ -11,6 +11,13 @@ class Paper(models.Model):
         return str(self.id)
 
 
+class Account(models.Model):
+    username = models.CharField(max_length=25)
+    password = models.CharField(max_length=15)
+    mode = models.IntegerField()
+    email = models.EmailField()
+
+
 class DeviceMiLed(models.Model):
     data = models.CharField(max_length=2000)
     update_date = models.DateTimeField()

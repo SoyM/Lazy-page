@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Paper, DeviceMiLed
+from .models import Paper, DeviceMiLed, Account
 
 
 class PaperAdmin(admin.ModelAdmin):
@@ -12,10 +12,15 @@ class PaperAdmin(admin.ModelAdmin):
     ]
 
 
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ('username', 'password', 'mode', 'email')
+
+
 class DeviceAdmin(admin.ModelAdmin):
     list_display = ('data', 'update_date')
     list_filter = ['update_date']
 
 
 admin.site.register(Paper, PaperAdmin)
+admin.site.register(Account, AccountAdmin)
 admin.site.register(DeviceMiLed, DeviceAdmin)
