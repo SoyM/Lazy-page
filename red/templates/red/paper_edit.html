@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>{{ paper.title }}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="SoyM"/>
+    <meta name="renderer" content="webkit">
+    <script src="/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+</head>
+
+<body>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<textarea id="paper_1">
+</textarea>
+
+<script>
+    var simplemde = new SimpleMDE({element: $("#paper_1")[0]});
+    simplemde.value("{{ content }}");
+</script>
+</body>
+</html>
+

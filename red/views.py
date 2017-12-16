@@ -32,19 +32,29 @@ class ProjectView(generic.TemplateView):
     template_name = 'red/project.html'
 
 
+def paper_edit(request, pk):
+    paper = get_object_or_404(Paper, pk=pk)
+    return render(request, 'red/paper_edit.html', {
+        'id': paper.id,
+        'title': paper.title,
+        'content': paper.content,
+    })
+
+
 def panel(request):
     miled_list = get_list_or_404(DeviceMiLed)
     miled_data = json.loads(get_object_or_404(DeviceMiLed, pk=miled_list[len(miled_list) - 1].id).data)
     esp_list = get_list_or_404(DeviceEspStatus)
-    esp_data = get_object_or_404(DeviceEspStatus, pk=esp_list[len(esp_list)-1].id)
+    esp_data = get_object_or_404(DeviceEspStatus, pk=esp_list[len(esp_list) - 1].id)
 
-    return render(request, 'red/panel.html', {'power': miled_data['power'],
-                                              'bright': miled_data['bright'],
-                                              'temperature': esp_data.temperature,
-                                              'humidity': esp_data.humidity,
-                                              'mq': esp_data.mq,
-                                              'ap_ssid': esp_data.ssid,
-                                              })
+    return render(request, 'red/panel.html', {
+        'power': miled_data['power'],
+        'bright': miled_data['bright'],
+        'temperature': esp_data.temperature,
+        'humidity': esp_data.humidity,
+        'mq': esp_data.mq,
+        'ap_ssid': esp_data.ssid,
+    })
 
 
 @csrf_exempt

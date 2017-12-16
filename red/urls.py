@@ -9,5 +9,5 @@ urlpatterns = [
     path('post/', views.PostView.as_view(), name='post'),
     path('project/', views.ProjectView.as_view(), name='project'),
     path('update_status/', views.update_status, name='update_status'),
+    path('paper_edit/<int:pk>/', views.paper_edit, name='paper_edit')
 ]
-
