@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ paper.title }}</title>
-</head>
-<body>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{{ paper.title }}
-{{ paper.pub_date }}
-{{ paper.content }}
-</body>
-</html>
+{% extends "red/base.html" %}
+{% block title %}{{ paper.title }}{% endblock %}
+{% block content %}
+    <div class="tpl-page-container tpl-page-header-fixed">
+        <div class="am-container">
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            {{ paper.title }}
+            {{ paper.pub_date }}
+            {{ paper.content }}
+        </div>
+    </div>
+{% endblock %}

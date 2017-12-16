@@ -2,14 +2,16 @@
 {% block title %}Post{% endblock %}
 {% block content %}
     <div class="tpl-page-container tpl-page-header-fixed">
-        {% if latest_paper_list %}
-            <ul>
-                {% for paper in latest_paper_list %}
-                    <li><a href="{% url 'red:detail' paper.id %}">{{ paper.title }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No Papers are available.</p>
-        {% endif %}
+        <div class="am-container">
+            {% if latest_paper_list %}
+                <ul>
+                    {% for paper in latest_paper_list %}
+                        <li><a href="{% url 'red:detail' paper.id %}">{{ paper.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No Papers are available.</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
