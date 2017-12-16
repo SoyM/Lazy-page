@@ -7,6 +7,12 @@ class Paper(models.Model):
     content = models.CharField(max_length=2000)
     pub_date = models.DateTimeField()
 
+    @classmethod
+    def create(cls, title, content):
+        temp = cls(title=title, content=content)
+        temp.save()
+        return temp.id
+
     def __str__(self):
         return str(self.id)
 
