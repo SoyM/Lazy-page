@@ -33,16 +33,19 @@ class ProjectView(generic.TemplateView):
 
 
 def paper_edit(request, pk):
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         form = PaperForm(request.POST)
         if form.is_valid():
             return HttpResponse(Paper.create(request.POST['title'], request.POST['content']))
-    paper = get_object_or_404(Paper, pk=pk)
-    return render(request, 'red/paper_edit.html', {
-        'id': paper.id,
-        'title': paper.title,
-        'content': paper.content,
-    })
+        else:
+            return HttpResponse('params is not valid')
+    else:
+        paper = get_object_or_404(Paper, pk=pk)
+        return render(request, 'red/paper_edit.html', {
+            'id': paper.id,
+            'title': paper.title,
+            'content': paper.content,
+        })
 
 
 def panel(request):
