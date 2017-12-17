@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-    <title>{{ paper.title }}</title>
+    <title>{{ title }}</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="SoyM"/>
     <meta name="renderer" content="webkit">
-    <script src="/static/js/jquery.min.js"></script>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/amazeui.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 </head>
 
@@ -16,11 +20,17 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <h1>{{ title }}</h1>
-<textarea id="paper_1">
-</textarea>
-
+<form action="{% url 'red:paper_edit' id %}" method="post" id="paper_form">
+    {% csrf_token %}
+    <input name="title" type="hidden" value="{{ title }}" title="title">
+    <textarea id="content" name="content" form="paper_form" title="content">
+    </textarea>
+    <button type="submit" class="am-btn am-btn-primary am-radius">
+        <span style="color:white">Edit</span>
+    </button>
+</form>
 <script>
-    var simplemde = new SimpleMDE({element: $("#paper_1")[0]});
+    var simplemde = new SimpleMDE({element: $("#content")[0]});
     simplemde.value("{{ content }}");
 </script>
 </body>

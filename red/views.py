@@ -36,7 +36,8 @@ def paper_edit(request, pk):
     if request.method == 'POST':
         form = PaperForm(request.POST)
         if form.is_valid():
-            return HttpResponse(Paper.create(request.POST['title'], request.POST['content']))
+            Paper.edit(pk, request.POST['title'], request.POST['content'])
+            return HttpResponseRedirect('/%d/' % pk)
         else:
             return HttpResponse('params is not valid')
     else:
@@ -44,7 +45,8 @@ def paper_edit(request, pk):
         return render(request, 'red/paper_edit.html', {
             'id': paper.id,
             'title': paper.title,
-            'content': paper.content,
+            'pub_date': paper.pub_date,
+            'content': paper.content.replace('\r\n', '\\r\\n'),
         })
 
 

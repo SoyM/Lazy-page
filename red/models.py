@@ -8,13 +8,13 @@ class Paper(models.Model):
     pub_date = models.DateTimeField()
 
     @classmethod
-    def create(cls, title, content):
-        temp = cls(title=title, content=content)
-        temp.save()
-        return temp.id
+    def edit(cls, pk, title, content):
+        if cls(pk=pk, title=title, pub_date=datetime.now(), content=content).save():
+            return True
 
-    def __str__(self):
-        return str(self.id)
+
+def __str__(self):
+    return str(self.id)
 
 
 class Account(models.Model):
