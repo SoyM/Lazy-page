@@ -1,20 +1,20 @@
 {% extends "red/base.html" %}
-{% block title %}{{ paper.title }}{% endblock %}
-{% block extrastyle %}
-    
-{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% load static %}
 {% block content %}
     <div class="tpl-page-container tpl-page-header-fixed">
         <div class="am-container">
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-            {{ paper.title }}
-            {{ paper.pub_date }}
-            {{ paper.content }}
-            <a href="{% url 'red:paper_edit' paper.id %}">
+            {% autoescape off %}
+                {{ content }}
+            {% endautoescape %}
+            <a href="{% url 'red:paper_edit' id %}">
                 <button type="button" class="am-btn am-btn-primary am-radius">
                     <span style="color:white">Edit</span>
                 </button>
             </a>
+
+            <p id="demo"></p>
         </div>
     </div>
 {% endblock %}

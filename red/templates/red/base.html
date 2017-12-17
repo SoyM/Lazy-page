@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/app.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     {% block extrastyle %}{% endblock %}
 </head>
 {% load i18n %}
 
 <body data-type="index">
-<header  class="am-topbar am-topbar-inverse admin-header">
+<header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
         <a href="{% url 'red:index' %}" class="tpl-logo">
             <img src="{% static 'img/logo.png' %}" alt="">
@@ -79,9 +80,7 @@
 {% block content %}
 {% endblock %}
 
-<script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/amazeui.min.js' %}"></script>
-<script src="{% static 'js/iscroll.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from datetime import datetime
 import json
+import markdown
 
 from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
 from .forms import DeviceStatus, PaperForm
@@ -13,11 +14,6 @@ from .forms import DeviceStatus, PaperForm
 # @require_http_methods(["GET"])
 class IndexView(generic.TemplateView):
     template_name = 'red/index.html'
-
-
-class DetailView(generic.DetailView):
-    model = Paper
-    template_name = 'red/detail.html'
 
 
 class PostView(generic.ListView):
@@ -30,6 +26,16 @@ class PostView(generic.ListView):
 
 class ProjectView(generic.TemplateView):
     template_name = 'red/project.html'
+
+
+def paper_detail(request, pk):
+    paper = get_object_or_404(Paper, pk=pk)
+    return render(request, 'red/detail.html', {
+        'id': paper.id,
+        'title': paper.title,
+        'pub_date': paper.pub_date,
+        'content': markdown.markdown(paper.content),
+    })
 
 
 def paper_edit(request, pk):
