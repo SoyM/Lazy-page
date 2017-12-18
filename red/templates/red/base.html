@@ -65,25 +65,35 @@
                                            class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span>
                 <span class="admin-fullText">Full screen</span></a></li>
 
-            <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+            {% if request.user.username %}
+            {% else %}
+                <li>
+                    <a href="{% url 'red:login' %}">
+                        <span style="color: #7FB0DA">Login</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if request.user.username %}
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link"
-                   href="{% if request.user.username %}
-                            {% else %}{% url 'red:login' %}
-                            {% endif %}">
+                   href="">
                     <span class="tpl-header-list-user-nick">
                         {% firstof request.user.username|safe "Login" %}
-                    </span><span
-                        class="tpl-header-list-user-ico"> <img
-                        src=""></span>
+                    </span>
+                    <span class="tpl-header-list-user-ico">
+                        <img src="">
+                    </span>
                 </a>
-                {% if request.user.username %}
-                    <ul class="am-dropdown-content">
-                        <li><a href="#"><span class="am-icon-power-off"></span> exit</a></li>
-                    </ul>
-                {% endif %}
+                <ul class="am-dropdown-content">
+                    <li><a href="#"><span class="am-icon-power-off"></span> exit</a></li>
+                </ul>
+            {% endif %}
             </li>
-            <li><a href="#" class="tpl-header-list-link"><span
-                    class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+            <li>
+                <a href="#" class="tpl-header-list-link">
+                    <span class="am-icon-sign-out tpl-header-list-ico-out-size"></span>
+                </a>
+            </li>
         </ul>
     </div>
 </header>
