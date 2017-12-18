@@ -33,44 +33,51 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
-            <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
-                <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
-                    <span class="am-icon-bell-o"></span> Message <span
-                        class="am-badge tpl-badge-success am-round">3</span>
-                </a>
-                <ul class="am-dropdown-content tpl-dropdown-content">
-                    <li class="tpl-dropdown-content-external">
-                        <h3>There are<span class="tpl-color-success">3</span> messages</h3><a href="#">Get all</a></li>
-                    <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
-                            class="am-icon-btn am-icon-plus tpl-dropdown-ico-btn-size tpl-badge-success"></span>
-                        example1</a>
-                        <span class="tpl-dropdown-list-fr">3 hours age</span>
-                    </li>
-                    <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
-                            class="am-icon-btn am-icon-check tpl-dropdown-ico-btn-size tpl-badge-danger"></span>
-                        example2</a>
-                        <span class="tpl-dropdown-list-fr">15 minutes ago</span>
-                    </li>
-                    <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
-                            class="am-icon-btn am-icon-bell-o tpl-dropdown-ico-btn-size tpl-badge-warning"></span>
-                        example3</a>
-                        <span class="tpl-dropdown-list-fr">2 days ago</span>
-                    </li>
-                </ul>
-            </li>
+            {% if request.user.username %}
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                    <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
+                        <span class="am-icon-bell-o"></span> Message <span
+                            class="am-badge tpl-badge-success am-round">3</span>
+                    </a>
+                    <ul class="am-dropdown-content tpl-dropdown-content">
+                        <li class="tpl-dropdown-content-external">
+                            <h3>There are<span class="tpl-color-success">3</span> messages</h3><a href="#">Get all</a>
+                        </li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
+                                class="am-icon-btn am-icon-plus tpl-dropdown-ico-btn-size tpl-badge-success"></span>
+                            example1</a>
+                            <span class="tpl-dropdown-list-fr">3 hours age</span>
+                        </li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
+                                class="am-icon-btn am-icon-check tpl-dropdown-ico-btn-size tpl-badge-danger"></span>
+                            example2</a>
+                            <span class="tpl-dropdown-list-fr">15 minutes ago</span>
+                        </li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span
+                                class="am-icon-btn am-icon-bell-o tpl-dropdown-ico-btn-size tpl-badge-warning"></span>
+                            example3</a>
+                            <span class="tpl-dropdown-list-fr">2 days ago</span>
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
             <li class="am-hide-sm-only"><a href="javascript:" id="admin-fullscreen"
                                            class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span>
                 <span class="admin-fullText">Full screen</span></a></li>
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
-                    <span class="tpl-header-list-user-nick">{{ request.user.username }}</span><span
+                    <span class="tpl-header-list-user-nick">
+                        {% firstof request.user.username "<strong>Login</strong>"|safe %}
+                    </span><span
                         class="tpl-header-list-user-ico"> <img
                         src=""></span>
                 </a>
-                <ul class="am-dropdown-content">
-                    <li><a href="#"><span class="am-icon-power-off"></span> exit</a></li>
-                </ul>
+                {% if request.user.username %}
+                    <ul class="am-dropdown-content">
+                        <li><a href="#"><span class="am-icon-power-off"></span> exit</a></li>
+                    </ul>
+                {% endif %}
             </li>
             <li><a href="#" class="tpl-header-list-link"><span
                     class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
