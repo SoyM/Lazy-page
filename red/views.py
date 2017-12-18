@@ -3,12 +3,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.shortcuts import get_list_or_404, render, get_object_or_404
+from django.contrib import auth
 from datetime import datetime
 import json
 import markdown
 
 from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
-from .forms import DeviceStatus, PaperForm
+from .forms import DeviceStatus, PaperForm, AccountForm
 
 
 # @require_http_methods(["GET"])
@@ -26,6 +27,24 @@ class PostView(generic.ListView):
 
 class ProjectView(generic.TemplateView):
     template_name = 'red/project.html'
+
+
+def login(request):
+    uf = AccountForm
+    if request.method == 'GET':
+        return render(request, 'red/login.html', {
+            'uf': uf,
+        })
+    elif request.method == 'POST':
+        if AccountForm(request.POST).is_valid:
+            user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None and user.is_active:
+                auth.login(request, user)
+                return render(request, 'red/index.html')
+            else:
+                return render(request, 'red/login.html')
+        else:
+            return render(request, 'red/login.html')
 
 
 def paper_detail(request, pk):
