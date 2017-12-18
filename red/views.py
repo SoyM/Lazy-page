@@ -31,12 +31,11 @@ class ProjectView(generic.TemplateView):
 
 
 def login(request):
-    uf = AccountForm
     if request.method == 'GET':
         if request.user.is_authenticated:
             HttpResponseRedirect('/')
         return render(request, 'red/login.html', {
-            'uf': uf,
+            'uf': AccountForm,
         })
     elif request.method == 'POST':
         if AccountForm(request.POST).is_valid:
