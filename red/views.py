@@ -31,13 +31,7 @@ class ProjectView(generic.TemplateView):
 
 
 def login(request):
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            HttpResponseRedirect('/')
-        return render(request, 'red/login.html', {
-            'uf': AccountForm,
-        })
-    elif request.method == 'POST':
+    if request.method == 'POST':
         if AccountForm(request.POST).is_valid:
             user = auth.authenticate(request, username=request.POST['username'], password=request.POST['password'])
             if user is not None and user.is_active:
@@ -47,6 +41,12 @@ def login(request):
                 return render(request, 'red/login.html')
         else:
             return render(request, 'red/login.html')
+    else:
+        if request.user.is_authenticated:
+            HttpResponseRedirect('/')
+        return render(request, 'red/login.html', {
+            'uf': AccountForm,
+        })
 
 
 def paper_detail(request, pk):
