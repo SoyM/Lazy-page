@@ -37,7 +37,6 @@ def login(request):
             HttpResponseRedirect('/')
         return render(request, 'red/login.html', {
             'uf': uf,
-            'username': request.user.username,
         })
     elif request.method == 'POST':
         if AccountForm(request.POST).is_valid:
