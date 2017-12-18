@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <title>{{ title }}</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="SoyM"/>
-    <meta name="renderer" content="webkit">
-    {% load static %}
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
-    <link rel="stylesheet" href="{% static 'css/amazeui.min.css' %}"/>
+{% extends "red/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block extrastyle %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/amazeui.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-</head>
+{% endblock %}
 
-<body>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<h1>{{ title }}</h1>
-<form action="{% url 'red:paper_edit' id %}" method="post" id="paper_form">
-    {% csrf_token %}
-    <input name="title" type="hidden" value="{{ title }}" title="title">
-    <textarea id="content" name="content" form="paper_form" title="content">
+{% block content %}
+    <div class="tpl-page-container tpl-page-header-fixed">
+        <div class="am-container">
+            <h1>{{ title }}</h1>
+            <form action="{% url 'red:paper_edit' id %}" method="post" id="paper_form">
+                {% csrf_token %}
+                <input name="title" type="hidden" value="{{ title }}" title="title">
+                <textarea id="content" name="content" form="paper_form" title="content">
     </textarea>
-    <button type="submit" class="am-btn am-btn-primary am-radius">
-        <span style="color:white">Edit</span>
-    </button>
-</form>
-<script>
-    var simplemde = new SimpleMDE({element: $("#content")[0]});
-    simplemde.value("{{ content }}");
-</script>
-</body>
-</html>
+                <button type="submit" class="am-btn am-btn-primary am-radius">
+                    <span style="color:white">Edit</span>
+                </button>
+            </form>
+            <script>
+                var simplemde = new SimpleMDE({element: $("#content")[0]});
+                simplemde.value("{{ content }}");
+            </script>
+        </div>
+    </div>
+{% endblock %}
 
