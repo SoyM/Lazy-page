@@ -36,7 +36,7 @@
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
                 <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
                     <span class="am-icon-bell-o"></span> Message <span
-                        class="am-badge tpl-badge-success am-round">3</span></span>
+                        class="am-badge tpl-badge-success am-round">3</span>
                 </a>
                 <ul class="am-dropdown-content tpl-dropdown-content">
                     <li class="tpl-dropdown-content-external">
@@ -58,13 +58,14 @@
                     </li>
                 </ul>
             </li>
-            <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"
+            <li class="am-hide-sm-only"><a href="javascript:" id="admin-fullscreen"
                                            class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span>
                 <span class="admin-fullText">Full screen</span></a></li>
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
-                <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
-                    <span class="tpl-header-list-user-nick">SoyM</span><span class="tpl-header-list-user-ico"> <img
+                <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
+                    <span class="tpl-header-list-user-nick">{{ request.user.username }}</span><span
+                        class="tpl-header-list-user-ico"> <img
                         src=""></span>
                 </a>
                 <ul class="am-dropdown-content">

@@ -4,6 +4,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 import json
 import markdown
@@ -32,12 +33,15 @@ class ProjectView(generic.TemplateView):
 def login(request):
     uf = AccountForm
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            HttpResponseRedirect('/')
         return render(request, 'red/login.html', {
             'uf': uf,
+            'username': request.user.username,
         })
     elif request.method == 'POST':
         if AccountForm(request.POST).is_valid:
-            user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
+            user = auth.authenticate(request, username=request.POST['username'], password=request.POST['password'])
             if user is not None and user.is_active:
                 auth.login(request, user)
                 return render(request, 'red/index.html')
@@ -75,6 +79,7 @@ def paper_edit(request, pk):
         })
 
 
+@login_required()
 def panel(request):
     miled_list = get_list_or_404(DeviceMiLed)
     miled_data = json.loads(get_object_or_404(DeviceMiLed, pk=miled_list[len(miled_list) - 1].id).data)
