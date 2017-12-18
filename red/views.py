@@ -59,6 +59,7 @@ def paper_detail(request, pk):
     })
 
 
+@login_required()
 def paper_edit(request, pk):
     if request.method == 'POST':
         form = PaperForm(request.POST)
