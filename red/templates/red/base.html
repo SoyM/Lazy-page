@@ -66,9 +66,12 @@
                 <span class="admin-fullText">Full screen</span></a></li>
 
             <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
-                <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:">
+                <a class="am-dropdown-toggle tpl-header-list-link"
+                   href="{% if request.user.username %}
+                            {% else %}{% url 'red:login' %}
+                            {% endif %}">
                     <span class="tpl-header-list-user-nick">
-                        {% firstof request.user.username "<strong>Login</strong>"|safe %}
+                        {% firstof request.user.username|safe "Login" %}
                     </span><span
                         class="tpl-header-list-user-ico"> <img
                         src=""></span>
