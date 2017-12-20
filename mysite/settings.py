@@ -117,4 +117,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_ROOT = '/var/www/Lazy-page/red/static/'
+STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
