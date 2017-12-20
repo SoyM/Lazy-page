@@ -1,10 +1,7 @@
 FROM python:3.6.3-stretch
 
-WORKDIR ./
+ADD . /usr/src/
 
-COPY requirements.txt ./
+WORKDIR /usr/src
+
 RUN pip install --no-cache-dir -r requirements.txt
-
-ADD . ./
-
-CMD [ "python", "./manage.py", "runserver", "0.0.0.0:80"]
