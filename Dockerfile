@@ -1,7 +1,6 @@
-FROM python:3.6.3-stretch
-
-ADD . /usr/src/
-
-WORKDIR /usr/src
-
+FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD . /code
 RUN pip install --no-cache-dir -r requirements.txt
