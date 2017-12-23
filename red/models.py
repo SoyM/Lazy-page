@@ -12,9 +12,8 @@ class Paper(models.Model):
         if cls(pk=pk, title=title, pub_date=datetime.now(), content=content).save():
             return True
 
-
-def __str__(self):
-    return str(self.id)
+    def __str__(self):
+        return str(self.id)
 
 
 class Account(models.Model):
