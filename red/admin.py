@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Paper, DeviceMiLed, Account
+from .models import Paper, DeviceMiLed
 
 
 class PaperAdmin(admin.ModelAdmin):
