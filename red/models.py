@@ -10,7 +10,7 @@ class Paper(models.Model):
 
     @classmethod
     def edit(cls, pk, title, content):
-        if cls(pk=pk, title=title, pub_date=datetime.now(), content=base64.b64encode(bytes(content), 'utf-8')).save():
+        if cls(pk=pk, title=title, pub_date=datetime.now(), content=base64.b64encode(bytes(content, 'utf-8'))).save():
             return True
 
     def __str__(self):
