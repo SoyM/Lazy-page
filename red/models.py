@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import base64
 
 
 class Paper(models.Model):
@@ -9,7 +10,7 @@ class Paper(models.Model):
 
     @classmethod
     def edit(cls, pk, title, content):
-        if cls(pk=pk, title=title, pub_date=datetime.now(), content=content).save():
+        if cls(pk=pk, title=title, pub_date=datetime.now(), content=base64.b64encode(content)).save():
             return True
 
     def __str__(self):
