@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 import json
 import markdown
-
+import base64
 from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
 from .forms import DeviceStatus, PaperForm, AccountForm
 
@@ -55,7 +55,7 @@ def paper_detail(request, pk):
         'id': paper.id,
         'title': paper.title,
         'pub_date': paper.pub_date,
-        'content': markdown.markdown(paper.content),
+        'content': markdown.markdown(base64.b64decode(bytes(paper.content, 'utf-8'))),
     })
 
 
