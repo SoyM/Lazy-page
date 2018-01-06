@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 import json
 import markdown
-import base64
 from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
 from .forms import DeviceStatus, PaperForm, AccountForm
 
