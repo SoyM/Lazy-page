@@ -1840,7 +1840,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 }
 
 .myapp-login {
-    background: #e46e9a40;
+    background: #fff;
     background-size: 100%;
     height: 100%;
 }
@@ -1864,7 +1864,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 .myapp-login-logo-text {
     padding-top: 30px;
     font-family: Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", FontAwesome, sans-serif;
-    color: #fff;
+    color: #004980;
     font-weight: bold;
     font-size: 40px;
     text-align: center;
@@ -1919,7 +1919,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 }
 
 .login-am-center .am-form input {
-    background: #fff;
+    background: #c4e5ff;
     border: none;
     font-size: 12px;
     line-height: 30px;
@@ -1934,7 +1934,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 .login-am-center .am-btn-default {
     width: 100%;
     border-radius: 6px;
-    background: #53d192;
+    background: #36c6d3;
     border: none;
     color: #fff;
     font-size: 14px;

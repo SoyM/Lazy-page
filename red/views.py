@@ -38,7 +38,7 @@ def login(request):
                 auth.login(request, user)
                 return render(request, 'red/index.html')
             else:
-                return render(request, 'red/login.html')
+                return HttpResponseRedirect('/login/')
         else:
             return render(request, 'red/login.html')
     else:
@@ -55,7 +55,7 @@ def paper_detail(request, pk):
         'id': paper.id,
         'title': paper.title,
         'pub_date': paper.pub_date,
-        'content': markdown.markdown(base64.b64decode(bytes(paper.content, 'utf-8'))),
+        'content': markdown.markdown(paper.content),
     })
 
 
