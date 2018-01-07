@@ -6,6 +6,7 @@ from django.shortcuts import get_list_or_404, render, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+import os
 import json
 import markdown
 from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
@@ -17,12 +18,19 @@ class IndexView(generic.TemplateView):
     template_name = 'red/index.html'
 
 
-class PostView(generic.ListView):
-    template_name = 'red/post.html'
-    context_object_name = 'latest_paper_list'
-
-    def get_queryset(self):
-        return Paper.objects.order_by('-pub_date')[:6]
+def post(request):
+    file_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + os.path.sep + 'paper'
+    paper = {}
+    for root, dirs, files in os.walk(file_dir):
+        print(dirs)  # 当前路径下所有子目录
+        print(files)  # 当前路径下所有非目录子文件
+        count = 0
+        for paper_title in files:
+            paper[count] = paper_title[:-3]
+            count += 1
+    return render(request, 'red/post.html', {
+        'paper': paper,
+    })
 
 
 class ProjectView(generic.TemplateView):
@@ -48,13 +56,18 @@ def login(request):
         })
 
 
-def paper_detail(request, pk):
-    paper = get_object_or_404(Paper, pk=pk)
+def paper_detail(request, title):
+    file_object = open(
+        os.path.dirname(
+            os.path.dirname(os.path.realpath(__file__))) + os.path.sep + 'paper' + os.path.sep + title + '.md')
+    try:
+        content = file_object.read()
+    finally:
+        file_object.close()
+
     return render(request, 'red/detail.html', {
-        'id': paper.id,
-        'title': paper.title,
-        'pub_date': paper.pub_date,
-        'content': markdown.markdown(paper.content),
+        'title': title,
+        'content': markdown.markdown(content),
     })
 
 
