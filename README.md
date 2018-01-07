@@ -1,6 +1,5 @@
 # Lazy-page
-Lazy-page written in Python3 and Django2.
-
+written in Python3 and Django2. :smile_cat:
 ## How to Run
 ```shell
 pip install -r requirements.txt
