@@ -9,7 +9,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     # post
     path('p/<str:title>', views.paper_detail, name='detail'),
-    path('<int:pk>/paper_edit/', views.paper_edit, name='paper_edit'),
     path('p/', views.post, name='post'),
     # panel
     path('panel/', views.panel, name='panel'),

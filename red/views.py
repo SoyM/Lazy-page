@@ -9,8 +9,8 @@ from datetime import datetime
 import os
 import json
 import markdown
-from .models import Paper, DeviceMiLed, DeviceEspStatus, DeviceEspConfig
-from .forms import DeviceStatus, PaperForm, AccountForm
+from .models import DeviceMiLed, DeviceEspStatus, DeviceEspConfig
+from .forms import DeviceStatus, AccountForm
 
 
 # @require_http_methods(["GET"])
