@@ -7,13 +7,6 @@
             {% autoescape off %}
                 {{ content }}
             {% endautoescape %}
-            {% if request.user.username %}
-                <a href="{% url 'red:paper_edit' id %}">
-                    <button type="button" class="am-btn am-btn-primary am-radius">
-                        <span style="color:white">Edit</span>
-                    </button>
-                </a>
-            {% endif %}
             <p id="demo"></p>
         </div>
     </div>

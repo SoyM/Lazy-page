@@ -72,25 +72,6 @@ def paper_detail(request, title):
 
 
 @login_required()
-def paper_edit(request, pk):
-    if request.method == 'POST':
-        form = PaperForm(request.POST)
-        if form.is_valid():
-            Paper.edit(pk, request.POST['title'], request.POST['content'])
-            return HttpResponseRedirect('/%d/' % pk)
-        else:
-            return HttpResponse('params is not valid')
-    else:
-        paper = get_object_or_404(Paper, pk=pk)
-        return render(request, 'red/paper_edit.html', {
-            'id': paper.id,
-            'title': paper.title,
-            'pub_date': paper.pub_date,
-            'content': paper.content.replace('\r\n', '\\r\\n'),
-        })
-
-
-@login_required()
 def panel(request):
     miled_list = get_list_or_404(DeviceMiLed)
     miled_data = json.loads(get_object_or_404(DeviceMiLed, pk=miled_list[len(miled_list) - 1].id).data)

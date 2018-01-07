@@ -1,20 +1,5 @@
 from django.db import models
 from datetime import datetime
-import base64
-
-
-class Paper(models.Model):
-    title = models.CharField(max_length=140)
-    content = models.TextField(max_length=2000)
-    pub_date = models.DateTimeField()
-
-    @classmethod
-    def edit(cls, pk, title, content):
-        if cls(pk=pk, title=title, pub_date=datetime.now(), content=content).save():
-            return True
-
-    def __str__(self):
-        return str(self.id)
 
 
 class DeviceMiLed(models.Model):
