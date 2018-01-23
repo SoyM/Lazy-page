@@ -3,14 +3,27 @@ version: '3'
 services:
   db:
     image: postgres
+    restart: always
+    volumes:
+    - ./postgres:/var/lib/postgres
+    environment:
+      POSTGRES_PASSWORD: 123456
     ports:
-     - "5432:5432"
+     - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 1028:8080
+
   web:
+    depends_on:
+      - db
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
-      - "80:8000"
-    depends_on:
-      - db
+      - 80:8000
+
