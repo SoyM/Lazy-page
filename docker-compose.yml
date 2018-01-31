@@ -14,6 +14,8 @@ services:
   adminer:
     depends_on:
       - db
+    links:
+      - db
     image: adminer
     restart: always
     ports:
