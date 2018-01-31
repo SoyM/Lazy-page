@@ -5,13 +5,15 @@ services:
     image: postgres
     restart: always
     volumes:
-    - ./postgresql:/var/lib/postgresql
+    - ./postgresql/data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 123456
     ports:
      - 5432:5432
 
   adminer:
+    depends_on:
+      - db
     image: adminer
     restart: always
     ports:
