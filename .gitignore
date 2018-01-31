@@ -1,4 +1,5 @@
 .idea/
+__pycache__/
 red/__pycache__/
 mysite/__pycache__/
 red/migrations/

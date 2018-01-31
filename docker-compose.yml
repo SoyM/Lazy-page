@@ -23,7 +23,8 @@ services:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - .:/usr/src/app
+    restart: always
     ports:
       - 80:8000
 
