@@ -11,14 +11,6 @@ services:
     ports:
       - 80:8000
 
-  adminer:
-    depends_on:
-      - db
-    image: adminer
-    restart: always
-    ports:
-      - 1028:8080
-
   db:
     image: postgres
     restart: always

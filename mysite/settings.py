@@ -119,3 +119,4 @@ USE_TZ = True
 STATIC_ROOT = '/var/www/Lazy-page/red/static/'
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
+# SECURE_SSL_REDIRECT = True
