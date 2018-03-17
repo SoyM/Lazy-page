@@ -1,22 +1,20 @@
 version: '3'
 services:
   web:
-    depends_on:
-      - db
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/usr/src/app
     restart: always
     ports:
-      - 80:8000
+      - 8000:8000
+    networks:
+      - default
+      - outside
 
-  db:
-    image: postgres
-    restart: always
-    volumes:
-    - ./postgresql/data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: 123456
-    ports:
-     - 5432:5432
+networks:
+  outside:
+    external:
+      name: soym_net
+            
+       
