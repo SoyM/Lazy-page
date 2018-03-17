@@ -1,0 +1,1 @@
+[{"model": "red.devicemiled", "pk": 1, "fields": {"data": "{\"power\": \"off\",\"bright\": 100}", "update_date": "2017-12-19T00:00:00Z"}}, {"model": "red.deviceespstatus", "pk": 1, "fields": {"temperature": 23, "humidity": 60, "mq": 11, "ssid": "ASUS"}}]
