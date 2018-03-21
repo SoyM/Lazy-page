@@ -3,6 +3,47 @@
 {% load static %}
 {% block extrastyle %}
     <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script>
+        // Ajax队列
+        var runFlag = true;
+        var interrupt = false;
+         var index = 0;
+        var interval = setInterval(function () {
+            // 未到合适时机发请求，跳过本次循环
+            if (!runFlag) {
+                return;
+            }
+            // 强制中断标识，这将中断余下所有业务
+            if (interrupt) {
+                clearInterval(interval);
+                return;
+            }
+            // 开始请求
+            runFlag = false;
+            $("#doCount2").text("第 " + (index + 1) + " 个/共 " + enrolling_list.length + " 个");
+            // 上传图片的url
+            var upload_picture_url = enrolling_list[index];
+            $.ajax({
+                url: upload_picture_url,
+                type: 'get',
+                data: {},
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    $("#humidity").text(data.humidity);
+                    $("#temperature").text(data.temperature);
+                    $("#ap_ssid").text(data.ap_ssid);
+                    $("#co").text(data.co);
+                    runFlag = true;
+                },
+                error: function (xhr, textStatus) {
+                    console.log(xhr);
+                }
+            });
+        }, 500);
+
+
+    </script>
 {% endblock %}
 {% block content %}
     <div class="tpl-page-container tpl-page-header-fixed">
@@ -93,7 +134,7 @@
                             <i class="am-icon-comments-o"></i>
                         </div>
                         <div class="details">
-                            <div class="number"> {{ temperature }}°C</div>
+                            <div class="number" id="temperature"> {{ temperature }}°C</div>
                             <div class="desc"> Temperature</div>
                         </div>
                     </div>
@@ -104,7 +145,7 @@
                             <i class="am-icon-bar-chart-o"></i>
                         </div>
                         <div class="details">
-                            <div class="number"> {{ humidity }}%</div>
+                            <div class="number" id="humidity"> {{ humidity }}%</div>
                             <div class="desc"> Humidity</div>
                         </div>
                     </div>
@@ -126,7 +167,7 @@
                             <i class="am-icon-android"></i>
                         </div>
                         <div class="details">
-                            <div class="number">{{ power }}</div>
+                            <div class="number" id="ap_ssid">{{ ap_ssid }}</div>
                             <div class="desc"> WLan</div>
                         </div>
                         <a class="more" href="#"> More
@@ -433,7 +474,8 @@
                                                         <i class="am-icon-bolt"></i>
                                                     </span>
                                                     <span> Sensor DATA
-                                                        <span class="tpl-label-info"> Download Data<i class="am-icon-share"></i>
+                                                        <span class="tpl-label-info"> Download Data<i
+                                                                class="am-icon-share"></i>
                                                         </span>
                                                     </span>
                                                 </div>

@@ -70,6 +70,21 @@ def paper_detail(request, title):
     })
 
 
+def panel_data():
+    esp_list = get_list_or_404(MachineParams)
+    params = get_object_or_404(MachineParams, pk=esp_list[len(esp_list) - 1].id)
+    return HttpResponse(
+        json.dumps({
+            # 'power': miled_data['power'],
+            # 'bright': miled_data['bright'],
+            'temperature': params.temperature,
+            'humidity': params.humidity,
+            'mq': params.mq,
+            'ap_ssid': params.ssid,
+        })
+    )
+
+
 @login_required()
 def panel(request):
     miled_list = get_list_or_404(DeviceMiLed)
