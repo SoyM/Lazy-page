@@ -9,7 +9,7 @@ import os
 import json
 import markdown
 from .models import DeviceMiLed, MachineParams
-from .forms import DeviceStatus, AccountForm
+from .forms import AccountForm, MachineParamsForm
 
 
 # @require_http_methods(["GET"])
@@ -105,9 +105,10 @@ def panel(request):
 @csrf_exempt
 def update_status(request):
     if request.method == 'POST':
-        form = DeviceStatus(request.POST)
+        data = json.loads(request.read())
+        form = MachineParamsForm(data)
         if form.is_valid():
-            return HttpResponse(MachineParams.create(data=request.POST.getlist('data')))
+            return HttpResponse(MachineParams.create(data))
         else:
             return HttpResponse('params are not valid')
     else:

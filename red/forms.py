@@ -8,3 +8,10 @@ class AccountForm(forms.Form):
 
 class DeviceStatus(forms.Form):
     data = forms.CharField(label='data', max_length=2000)
+
+
+class MachineParamsForm(forms.Form):
+    temperature = forms.IntegerField()
+    humidity = forms.IntegerField()
+    mq = forms.IntegerField()
+    ssid = forms.CharField(max_length=60)
