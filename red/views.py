@@ -9,7 +9,7 @@ from datetime import datetime
 import os
 import json
 import markdown
-from .models import DeviceMiLed, DeviceEspStatus, DeviceEspConfig
+from .models import DeviceMiLed, MachineParams
 from .forms import DeviceStatus, AccountForm
 
 
@@ -93,7 +93,7 @@ def update_status(request):
     if request.method == 'POST':
         form = DeviceStatus(request.POST)
         if form.is_valid():
-            return HttpResponse(DeviceMiLed.create(data=request.POST.getlist('data')))
+            return HttpResponse(MachineParams.create(data=request.POST.getlist('data')))
         else:
             return HttpResponse('params are not valid')
     else:
