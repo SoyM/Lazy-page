@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.shortcuts import get_list_or_404, render, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
 import os
 import json
 import markdown
@@ -75,8 +74,8 @@ def paper_detail(request, title):
 def panel(request):
     miled_list = get_list_or_404(DeviceMiLed)
     miled_data = json.loads(get_object_or_404(DeviceMiLed, pk=miled_list[len(miled_list) - 1].id).data)
-    esp_list = get_list_or_404(DeviceEspStatus)
-    esp_data = get_object_or_404(DeviceEspStatus, pk=esp_list[len(esp_list) - 1].id)
+    esp_list = get_list_or_404(MachineParams)
+    esp_data = get_object_or_404(MachineParams, pk=esp_list[len(esp_list) - 1].id)
 
     return render(request, 'red/panel.html', {
         'power': miled_data['power'],
