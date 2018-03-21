@@ -70,7 +70,7 @@ def paper_detail(request, title):
     })
 
 
-def panel_data():
+def panel_data(request):
     esp_list = get_list_or_404(MachineParams)
     params = get_object_or_404(MachineParams, pk=esp_list[len(esp_list) - 1].id)
     return HttpResponse(
