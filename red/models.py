@@ -26,7 +26,8 @@ class MachineParams(models.Model):
     @classmethod
     def create(cls, data):
         data['update_date'] = datetime.now()
-        temp = cls(data)
+        temp = cls(temperature=data["temperature"], humidity=data["humidity"], mq=data["mq"], ssid=data["ssid"],
+                   update_date=data["update_date"])
         temp.save()
         return temp.id
 

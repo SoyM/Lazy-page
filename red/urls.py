@@ -12,5 +12,6 @@ urlpatterns = [
     path('p/', views.post, name='post'),
     # panel
     path('panel/', views.panel, name='panel'),
+    path('panel_data/', views.panel_data, name='panel_data'),
     path('update_status/', views.update_status, name='update_status'),
 ]

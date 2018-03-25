@@ -7,7 +7,6 @@
         // Ajax队列
         var runFlag = true;
         var interrupt = false;
-         var index = 0;
         var interval = setInterval(function () {
             // 未到合适时机发请求，跳过本次循环
             if (!runFlag) {
@@ -20,11 +19,9 @@
             }
             // 开始请求
             runFlag = false;
-            $("#doCount2").text("第 " + (index + 1) + " 个/共 " + enrolling_list.length + " 个");
             // 上传图片的url
-            var upload_picture_url = enrolling_list[index];
             $.ajax({
-                url: upload_picture_url,
+                url: "/panel_data",
                 type: 'get',
                 data: {},
                 dataType: 'json',
@@ -134,7 +131,7 @@
                             <i class="am-icon-comments-o"></i>
                         </div>
                         <div class="details">
-                            <div class="number" id="temperature"> {{ temperature }}°C</div>
+                            <div class="number"><span id="temperature">{{ temperature }}</span>°C</div>
                             <div class="desc"> Temperature</div>
                         </div>
                     </div>
@@ -145,7 +142,7 @@
                             <i class="am-icon-bar-chart-o"></i>
                         </div>
                         <div class="details">
-                            <div class="number" id="humidity"> {{ humidity }}%</div>
+                            <div class="number"><span id="humidity">{{ humidity }}</span>%</div>
                             <div class="desc"> Humidity</div>
                         </div>
                     </div>
