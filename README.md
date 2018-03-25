@@ -1,9 +1,4 @@
 # Lazy-page
-written in Python3 and Django2. :smile_cat:
-## How to Run
-```shell
-pip install -r requirements.txt
-git clone https://github.com/SoyM/Lazy-page.git
-cd Lazy-page
-python manage.py runserver
-```
+A web application for [foolbot](https://github.com/SoyM/foolbot) and [esp32bot](https://github.com/SoyM/Esp32bot)
+
+## Install
