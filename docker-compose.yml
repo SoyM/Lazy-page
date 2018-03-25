@@ -11,6 +11,18 @@ services:
     networks:
       - outside
 
+ db:
+    image: postgres
+    restart: always
+#    volumes:
+#    - ./postgresql/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 123456
+    ports:
+     - 5432:5432
+    networks:
+      - outside
+
 networks:
   outside:
     external:
