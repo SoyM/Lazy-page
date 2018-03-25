@@ -11,7 +11,7 @@ services:
     networks:
       - outside
 
- db:
+  db:
     image: postgres
     restart: always
 #    volumes:
