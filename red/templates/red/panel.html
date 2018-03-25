@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "red/base.html" %}
 {% block title %}Controller panel{% endblock %}
 {% load static %}
@@ -487,4 +488,495 @@
             </div>
         </div>
     </div>
+=======
+{% extends "red/base.html" %}
+{% block title %}Controller panel{% endblock %}
+{% load static %}
+{% block extrastyle %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script>
+        // Ajax队列
+        var runFlag = true;
+        var interrupt = false;
+        var interval = setInterval(function () {
+            // 未到合适时机发请求，跳过本次循环
+            if (!runFlag) {
+                return;
+            }
+            // 强制中断标识，这将中断余下所有业务
+            if (interrupt) {
+                clearInterval(interval);
+                return;
+            }
+            // 开始请求
+            runFlag = false;
+            // 上传图片的url
+            $.ajax({
+                url: "/panel_data",
+                type: 'get',
+                data: {},
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    $("#humidity").text(data.humidity);
+                    $("#temperature").text(data.temperature);
+                    $("#ap_ssid").text(data.ap_ssid);
+                    $("#co").text(data.co);
+                    runFlag = true;
+                },
+                error: function (xhr, textStatus) {
+                    console.log(xhr);
+                }
+            });
+        }, 500);
+
+
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="tpl-page-container tpl-page-header-fixed">
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                something you know
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>Panel</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-table"></i>
+                            <span>chart</span>
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                        </a>
+                        <ul class="tpl-left-nav-sub-menu">
+                            <li>
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>chart1</span>
+                                    <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                </a>
+
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>chart2</span>
+                                    <i class="tpl-left-nav-content tpl-badge-success">
+                                        18
+                                    </i>
+                                </a>
+
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>chart3</span>
+                                    <i class="tpl-left-nav-content tpl-badge-primary">
+                                        5
+                                    </i>
+                                </a>
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>chart4</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-wpforms"></i>
+                            <span>Form</span>
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                        </a>
+                        <ul class="tpl-left-nav-sub-menu" style="display: block;">
+                            <li>
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>Form1</span>
+                                    <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                </a>
+
+                                <a href="">
+                                    <i class="am-icon-angle-right"></i>
+                                    <span>Form2</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="tpl-content-wrapper">
+            <div class="tpl-content-page-title">
+                Status
+            </div>
+            <div class="row">
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat blue">
+                        <div class="visual">
+                            <i class="am-icon-comments-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"><span id="temperature">{{ temperature }}</span>°C</div>
+                            <div class="desc"> Temperature</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat red">
+                        <div class="visual">
+                            <i class="am-icon-bar-chart-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"><span id="humidity">{{ humidity }}</span>%</div>
+                            <div class="desc"> Humidity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat green">
+                        <div class="visual">
+                            <i class="am-icon-apple"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number"> Safe</div>
+                            <div class="desc"> CO</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat purple">
+                        <div class="visual">
+                            <i class="am-icon-android"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="ap_ssid">{{ ap_ssid }}</div>
+                            <div class="desc"> WLan</div>
+                        </div>
+                        <a class="more" href="#"> More
+                            <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tpl-content-scope">
+                <div class="note note-info">
+                    <h3>SoyM Message
+                        <span class="close" data-close="note"></span>
+                    </h3>
+                    <p>Awesome! The status is well now.</p>
+                    <p><span class="label label-danger">Warning:</span>
+                        The <span style="color:red">garage door</span> is not close now.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="am-u-md-6 am-u-sm-12 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-green ">
+                            <i class="am-icon-cloud-download"></i>
+                            <span> Cloud data statistics</span>
+                        </div>
+                        <div class="actions">
+                            <ul class="actions-btn">
+                                <li class="red-on">Today</li>
+                                <li class="green">Yesterday</li>
+                                <li class="blue">Last week</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--此部分数据请在 js文件夹下中的 app.js 中的 “百度图表A” 处修改数据 插件使用的是 百度echarts-->
+                    <div class="tpl-echarts" id="tpl-echarts-A">
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6 am-u-sm-12 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-red ">
+                            <i class="am-icon-bar-chart"></i>
+                            <span> Cloud dynamic data</span>
+                        </div>
+                        <div class="actions">
+                            <ul class="actions-btn">
+                                <li class="purple-on">Today</li>
+                                <li class="green">Yesterday</li>
+                                <li class="dark">Last week</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tpl-scrollable">
+                        <div class="number-stats">
+                            <div class="stat-number am-fl am-u-md-6">
+                                <div class="title am-text-right"> Total</div>
+                                <div class="number am-text-right am-text-warning"> 5460</div>
+                            </div>
+                            <div class="stat-number am-fr am-u-md-6">
+                                <div class="title"> Total</div>
+                                <div class="number am-text-success"> Free</div>
+                            </div>
+                        </div>
+
+                        <table class="am-table tpl-table">
+                            <thead>
+                            <tr class="tpl-table-uppercase">
+                                <th>Module</th>
+                                <th>Total</th>
+                                <th>error</th>
+                                <th>Percent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <img src="" alt="" class="user-pic">
+                                    <a class="user-name" href="#">Temp&humi</a>
+                                </td>
+                                <td>2635</td>
+                                <td>0</td>
+                                <td class="font-green bold">100%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="" alt="" class="user-pic">
+                                    <a class="user-name" href="#">CO</a>
+                                </td>
+                                <td>1267</td>
+                                <td>12</td>
+                                <td class="font-green bold">90%</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="" alt="" class="user-pic">
+                                    <a class="user-name" href="#">Servo</a>
+                                </td>
+                                <td>657</td>
+                                <td>65</td>
+                                <td class="font-green bold">32%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="am-u-md-6 am-u-sm-12 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-green ">
+                            <span>Assign task</span>
+                            <span class="caption-helper">3 available</span>
+                        </div>
+                        <div class="tpl-portlet-input">
+                            <div class="portlet-input input-small input-inline">
+                                <div class="input-icon right">
+                                    <i class="am-icon-search"></i>
+                                    <input type="text" class="form-control form-control-solid"
+                                           placeholder="research...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wrapper" class="wrapper">
+                        <div id="scroller" class="scroller">
+                            <ul class="tpl-task-list">
+                                <li>
+                                    <div class="task-checkbox">
+                                        <input type="hidden" value="1" name="test">
+                                        <input type="checkbox" class="liChild" value="2" name="test"></div>
+                                    <div class="task-title">
+                                        <span class="task-title-sp"> Available Task 1 </span>
+                                        <span class="label label-sm label-success">Available</span>
+                                        <span class="task-bell">
+                                            <i class="am-icon-bell-o"></i>
+                                        </span>
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="am-dropdown tpl-task-list-dropdown" data-am-dropdown>
+                                            <a href="#" class="am-dropdown-toggle tpl-task-list-hover "
+                                               data-am-dropdown-toggle>
+                                                <i class="am-icon-cog"></i> <span class="am-icon-caret-down"></span>
+                                            </a>
+                                            <ul class="am-dropdown-content tpl-task-list-dropdown-ul">
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-check"></i> Save </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-pencil"></i> Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-trash-o"></i> Delete </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="task-checkbox">
+                                        <input type="hidden" value="1" name="test">
+                                        <input type="checkbox" class="liChild" value="2" name="test"></div>
+                                    <div class="task-title">
+                                        <span class="task-title-sp"> Available Task 2 </span>
+                                        <span class="label label-sm label-danger">Red</span>
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="am-dropdown tpl-task-list-dropdown" data-am-dropdown>
+                                            <a href="#" class="am-dropdown-toggle tpl-task-list-hover "
+                                               data-am-dropdown-toggle>
+                                                <i class="am-icon-cog"></i> <span class="am-icon-caret-down"></span>
+                                            </a>
+                                            <ul class="am-dropdown-content tpl-task-list-dropdown-ul">
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-check"></i> Save </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-pencil"></i> Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-trash-o"></i> Delete </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="task-checkbox">
+                                        <input type="hidden" value="1" name="test">
+                                        <input type="checkbox" class="liChild" value="2" name="test"></div>
+                                    <div class="task-title">
+                                        <span class="task-title-sp"> Available Task 3 </span>
+                                        <span class="label label-sm label-warning">Huang</span>
+
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="am-dropdown tpl-task-list-dropdown" data-am-dropdown>
+                                            <a href="#" class="am-dropdown-toggle tpl-task-list-hover "
+                                               data-am-dropdown-toggle>
+                                                <i class="am-icon-cog"></i> <span class="am-icon-caret-down"></span>
+                                            </a>
+                                            <ul class="am-dropdown-content tpl-task-list-dropdown-ul">
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-check"></i> Save </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-pencil"></i> Edit </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:">
+                                                        <i class="am-icon-trash-o"></i> Delete </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="task-checkbox">
+                                        <input type="hidden" value="1" name="test">
+                                        <input type="checkbox" class="liChild" value="2" name="test"></div>
+                                    <div class="task-title">
+                                        <span class="task-title-sp"> Task 4 </span>
+                                        <span class="label label-sm label-default">Unable</span>
+
+                                    </div>
+                                    <div class="task-config">
+                                        <div class="am-dropdown tpl-task-list-dropdown" data-am-dropdown>
+                                            <a href="#" class="am-dropdown-toggle tpl-task-list-hover "
+                                               data-am-dropdown-toggle>
+                                                <i class="am-icon-cog"></i> <span class="am-icon-caret-down"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6 am-u-sm-12 row-mb">
+                <div class="tpl-portlet">
+                    <div class="tpl-portlet-title">
+                        <div class="tpl-caption font-green ">
+                            <span>Progress</span>
+                        </div>
+                    </div>
+
+                    <div class="am-tabs tpl-index-tabs" data-am-tabs>
+                        <ul class="am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">In Progress</a></li>
+                            <li><a href="#tab2">Finished</a></li>
+                        </ul>
+
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                <div id="wrapperA" class="wrapper">
+                                    <div id="scroller" class="scroller">
+                                        <ul class="tpl-task-list tpl-task-remind">
+                                            <li>
+                                                <div class="cosB">
+                                                    Now
+                                                </div>
+                                                <div class="cosA">
+                                                    <span class="cosIco">
+                                                        <i class="am-icon-bell-o"></i>
+                                                    </span>
+                                                    <span> Receive data of sensor.</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div id="wrapperB" class="wrapper">
+                                    <div id="scroller" class="scroller">
+                                        <ul class="tpl-task-list tpl-task-remind">
+                                            <li>
+                                                <div class="cosB">
+                                                    32 minutes ago
+                                                </div>
+                                                <div class="cosA">
+                                                    <span class="cosIco label-danger">
+                                                        <i class="am-icon-bolt"></i>
+                                                    </span>
+                                                    <span> Sensor DATA
+                                                        <span class="tpl-label-info"> Download Data<i
+                                                                class="am-icon-share"></i>
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> e96c7f02342ad210bbbb123664d78f0ea4d7b9eb
 {% endblock %}
