@@ -10,6 +10,7 @@
             crossorigin="anonymous"></script>
     <script src="{% static 'js/echarts.min.js' %}"></script>
     <script>
+
         // Ajax队列
         var runFlag = true;
         var interrupt = false;
@@ -152,24 +153,16 @@
         }
 
 
-        // 页面数据
         var pageData = {
-            // ===============================================
-            // 首页
-            // ===============================================
             'index': function indexData() {
-                // ==========================
-                // 百度图表A http://echarts.baidu.com/
-                // ==========================
-
                 var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
-                option = {
 
+                option = {
                     tooltip: {
                         trigger: 'axis'
                     },
                     legend: {
-                        data: ['邮件', '媒体', '资源']
+                        data: ['Temp', 'Head index', 'Humi']
                     },
                     grid: {
                         left: '3%',
@@ -187,7 +180,7 @@
                         type: 'value'
                     }],
                     series: [{
-                        name: '邮件',
+                        name: 'Temp',
                         type: 'line',
                         stack: '总量',
                         areaStyle: {normal: {}},
@@ -200,7 +193,7 @@
                         }
                     },
                         {
-                            name: '媒体',
+                            name: 'Head index',
                             type: 'line',
                             stack: '总量',
                             areaStyle: {normal: {}},
@@ -212,79 +205,7 @@
                             }
                         },
                         {
-                            name: '资源',
-                            type: 'line',
-                            stack: '总量',
-                            areaStyle: {normal: {}},
-                            data: [150, 232, 201, 154, 190, 330, 410],
-                            itemStyle: {
-                                normal: {
-                                    color: '#32c5d2'
-                                }
-                            }
-                        }
-                    ]
-                };
-                echartsA.setOption(option);
-            },
-            // ===============================================
-            // 图表页
-            // ===============================================
-            'chart': function chartData() {
-                // ==========================
-                // 百度图表A http://echarts.baidu.com/
-                // ==========================
-                var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
-                option = {
-
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        data: ['邮件', '媒体', '资源']
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        boundaryGap: true,
-                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-                    }],
-
-                    yAxis: [{
-                        type: 'value'
-                    }],
-                    series: [{
-                        name: '邮件',
-                        type: 'line',
-                        stack: '总量',
-                        areaStyle: {normal: {}},
-                        data: [120, 132, 101, 134, 90, 230, 210],
-                        itemStyle: {
-                            normal: {
-                                color: '#59aea2'
-                            },
-                            emphasis: {}
-                        }
-                    },
-                        {
-                            name: '媒体',
-                            type: 'line',
-                            stack: '总量',
-                            areaStyle: {normal: {}},
-                            data: [220, 182, 191, 234, 290, 330, 310],
-                            itemStyle: {
-                                normal: {
-                                    color: '#e7505a'
-                                }
-                            }
-                        },
-                        {
-                            name: '资源',
+                            name: 'Humi',
                             type: 'line',
                             stack: '总量',
                             areaStyle: {normal: {}},
@@ -300,6 +221,7 @@
                 echartsA.setOption(option);
             }
         }
+
     </script>
 
 

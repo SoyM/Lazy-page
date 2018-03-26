@@ -1511,14 +1511,6 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
     margin-bottom: 10px;
 }
 
-.tpl-table-images-content-i-shadow {
-    background: url(../img/lbbg.png) bottom repeat-x;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-}
 
 .tpl-table-images-content-i-info {
     position: absolute;
