@@ -111,14 +111,14 @@ def update_status(request):
 
 
 @csrf_exempt
-def get_bot_motion(request):
+def get_set_motion(request):
     try:
         response_data = BotMotion.objects.get(pk=1)
     except:
         return HttpResponse(False)
 
     return HttpResponse(json.dumps({
-        'bot_mode': response_data.bot_mode,
+        'set_mode': response_data.set_mode,
         'update_date': response_data.update_date.timestamp(),
     }))
 
