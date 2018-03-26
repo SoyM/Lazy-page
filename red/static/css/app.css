@@ -792,10 +792,6 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
     background-position: -27px -10px;
 }
 
-.m-icon-white {
-    background-image: url(../img/syncfusion-icons-white.png);
-}
-
 .dashboard-stat.red .more {
     color: #fff;
     background-color: #e53e49;
