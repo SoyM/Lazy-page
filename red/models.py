@@ -46,7 +46,7 @@ class BotMotion(models.Model):
             return update_data.id
         if 'bot_mode' in data:
             print("c")
-            update_data = cls(id=1, set_mode=data['bot_mode'], update_date=datetime.now())
+            update_data = cls(id=1, bot_mode=data['bot_mode'], update_date=datetime.now())
             update_data.save()
             return update_data.id
 
