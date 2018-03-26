@@ -2,6 +2,12 @@
 {% block title %}Controller panel{% endblock %}
 {% load static %}
 {% block extrastyle %}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
+            integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
+            integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+            crossorigin="anonymous"></script>
     <script src="{% static 'js/echarts.min.js' %}"></script>
     <script>
         // Ajax队列
@@ -211,68 +217,22 @@
                 <div class="tpl-portlet">
                     <div class="tpl-portlet-title">
                         <div class="tpl-caption font-red ">
-                            <i class="am-icon-bar-chart"></i>
-                            <span> Cloud dynamic data</span>
-                        </div>
-                        <div class="actions">
-                            <ul class="actions-btn">
-                                <li class="purple-on">Today</li>
-                                <li class="green">Yesterday</li>
-                                <li class="dark">Last week</li>
-                            </ul>
+                            <span>BotController</span>
                         </div>
                     </div>
-                    <div class="tpl-scrollable">
-                        <div class="number-stats">
-                            <div class="stat-number am-fl am-u-md-6">
-                                <div class="title am-text-right"> Total</div>
-                                <div class="number am-text-right am-text-warning"> 5460</div>
-                            </div>
-                            <div class="stat-number am-fr am-u-md-6">
-                                <div class="title"> Total</div>
-                                <div class="number am-text-success"> Free</div>
-                            </div>
+                    <div class="row">
+                        <div class="am-u-sm-8 am-u-sm-offset-4">
+                            <i class="fas fa-arrow-alt-circle-up fa-5x"></i>
                         </div>
-
-                        <table class="am-table tpl-table">
-                            <thead>
-                            <tr class="tpl-table-uppercase">
-                                <th>Module</th>
-                                <th>Total</th>
-                                <th>error</th>
-                                <th>Percent</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <img src="" alt="" class="user-pic">
-                                    <a class="user-name" href="#">Temp&humi</a>
-                                </td>
-                                <td>2635</td>
-                                <td>0</td>
-                                <td class="font-green bold">100%</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="" alt="" class="user-pic">
-                                    <a class="user-name" href="#">CO</a>
-                                </td>
-                                <td>1267</td>
-                                <td>12</td>
-                                <td class="font-green bold">90%</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="" alt="" class="user-pic">
-                                    <a class="user-name" href="#">Servo</a>
-                                </td>
-                                <td>657</td>
-                                <td>65</td>
-                                <td class="font-green bold">32%</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="am-u-sm-2 am-u-sm-offset-1">
+                            <i class="fas fa-arrow-alt-circle-left fa-5x"></i>
+                        </div>
+                        <div class="am-u-sm-2 am-u-sm-offset-4">
+                            <i class="fas fa-arrow-alt-circle-right fa-5x"></i>
+                        </div>
+                        <div class="am-u-sm-8 am-u-sm-offset-4">
+                            <i class="fas fa-arrow-alt-circle-down fa-5x"></i>
+                        </div>
                     </div>
                 </div>
             </div>

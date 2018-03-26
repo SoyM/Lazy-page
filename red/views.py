@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 import os
 import json
 import markdown
-from .models import DeviceMiLed, MachineParams
+from .models import DeviceMiLed, MachineParams, BotMotion
 from .forms import AccountForm, MachineParamsForm
 
 
@@ -108,3 +108,16 @@ def update_status(request):
             return HttpResponse('params are not valid')
     else:
         return HttpResponse(False)
+
+
+@csrf_exempt
+def get_bot_motion(request):
+    try:
+        response_data = BotMotion.objects.get(pk=1)
+    except:
+        return HttpResponse(False)
+
+    return HttpResponse(json.dumps({
+        'bot_mode': response_data.bot_mode,
+        'update_date': response_data.update_date.timestamp(),
+    }))

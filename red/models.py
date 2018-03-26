@@ -31,6 +31,19 @@ class MachineParams(models.Model):
         temp.save()
         return temp.id
 
+
+class BotMotion(models.Model):
+    set_mode = models.CharField(max_length=50)
+    bot_mode = models.CharField(max_length=50)
+    update_date = models.DateTimeField()
+
+    @classmethod
+    def create(cls, data):
+        if 'set_mode' in data:
+            update_data = cls(id=1, set_mode=data['set_mode'])
+            update_data.save()
+            return update_data.id
+
 # class DeviceEspConfig(models.Model):
 #     ssid_main = models.CharField(max_length=50)
 #     pwd_main = models.CharField(max_length=50)
