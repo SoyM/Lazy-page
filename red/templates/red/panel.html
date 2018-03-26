@@ -25,9 +25,8 @@
             }
             // 开始请求
             runFlag = false;
-            // 上传图片的url
             $.ajax({
-                url: "/panel_data",
+                url: "/panel_data/",
                 type: 'get',
                 data: {},
                 dataType: 'json',
@@ -43,10 +42,100 @@
                     console.log(xhr);
                 }
             });
-        }, 500);
-
-
+        }, 700);
     </script>
+
+    <script>
+        // Ajax队列
+        var runFlag = true;
+        var interrupt = false;
+        var interval = setInterval(function () {
+            // 未到合适时机发请求，跳过本次循环
+            if (!runFlag) {
+                return;
+            }
+            // 强制中断标识，这将中断余下所有业务
+            if (interrupt) {
+                clearInterval(interval);
+                return;
+            }
+            // 开始请求
+            runFlag = false;
+            $.ajax({
+                url: "/get_bot_motion/",
+                type: 'get',
+                data: {},
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    $("#motion_" + data.bot_mode).css("color", "Tomato");
+                    $("#bot_motion_update_date").text(data.update_date);
+                    runFlag = true;
+                },
+                error: function (xhr, textStatus) {
+                    console.log(xhr);
+                }
+            });
+        }, 300);
+    </script>
+
+    <script>
+        function up_mode() {
+            $.ajax({
+                url: "/change_bot_motion",
+                type: 'get',
+                data: {
+                    set_mode: "up"
+                },
+                dataType: 'text',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                }
+            })
+        }
+
+        function down_mode() {
+            $.ajax({
+                url: "/change_bot_motion",
+                type: 'get',
+                data: {
+                    set_mode: "down"
+                },
+                dataType: 'text',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                }
+            })
+        }
+        function left_mode() {
+            $.ajax({
+                url: "/change_bot_motion",
+                type: 'get',
+                data: {
+                    set_mode: "left"
+                },
+                dataType: 'text',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                }
+            })
+        }
+        function right_mode() {
+            $.ajax({
+                url: "/change_bot_motion",
+                type: 'get',
+                data: {
+                    set_mode: "right"
+                },
+                dataType: 'text',
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                }
+            })
+        }
+    </script>
+
+
 {% endblock %}
 {% block content %}
     <div class="tpl-page-container tpl-page-header-fixed">
@@ -221,16 +310,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="am-u-sm-8 am-u-sm-offset-4">
+                        <div id="motion_up" class="am-u-sm-8 am-u-sm-offset-4" onclick="up_mode()">
                             <i class="fas fa-arrow-alt-circle-up fa-5x"></i>
                         </div>
-                        <div class="am-u-sm-2 am-u-sm-offset-1">
+                        <div id="motion_left" class="am-u-sm-2 am-u-sm-offset-1" onclick="left_mode()">
                             <i class="fas fa-arrow-alt-circle-left fa-5x"></i>
                         </div>
-                        <div class="am-u-sm-2 am-u-sm-offset-4">
+                        <div id="motion_right" class="am-u-sm-2 am-u-sm-offset-4" onclick="right_mode()">
                             <i class="fas fa-arrow-alt-circle-right fa-5x"></i>
                         </div>
-                        <div class="am-u-sm-8 am-u-sm-offset-4">
+                        <div id="motion_down" class="am-u-sm-8 am-u-sm-offset-4" onclick="down_mode()">
                             <i class="fas fa-arrow-alt-circle-down fa-5x"></i>
                         </div>
                     </div>

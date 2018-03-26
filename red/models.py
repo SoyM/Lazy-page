@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import time
 
 
 class DeviceMiLed(models.Model):
@@ -40,7 +41,12 @@ class BotMotion(models.Model):
     @classmethod
     def create(cls, data):
         if 'set_mode' in data:
-            update_data = cls(id=1, set_mode=data['set_mode'])
+            update_data = cls(id=1, set_mode=data['set_mode'], update_date=time.strftime("%Y-%m-%d %H:%M:%S"))
+            update_data.save()
+            return update_data.id
+        if 'bot_mode' in data:
+            print("c")
+            update_data = cls(id=1, set_mode=data['bot_mode'], update_date=datetime.now())
             update_data.save()
             return update_data.id
 

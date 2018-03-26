@@ -121,3 +121,18 @@ def get_bot_motion(request):
         'bot_mode': response_data.bot_mode,
         'update_date': response_data.update_date.timestamp(),
     }))
+
+
+def change_bot_motion(request):
+    data = {'set_mode':request.GET['set_mode']}
+    print(request.GET['set_mode'] + "ss")
+    return HttpResponse(BotMotion.create(data))
+
+
+def update_bot_motion(request):
+    try:
+        if request.method == 'POST':
+            data = json.loads(request.read())
+            return HttpResponse(BotMotion.create(data))
+    except:
+        return HttpResponse(False)
