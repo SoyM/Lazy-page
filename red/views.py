@@ -136,12 +136,14 @@ def get_bot_motion(request):
     }))
 
 
+@csrf_exempt
 def change_bot_motion(request):
-    data = {'set_mode':request.GET['set_mode']}
+    data = {'set_mode': request.GET['set_mode']}
     print(request.GET['set_mode'] + "ss")
     return HttpResponse(BotMotion.create(data))
 
 
+@csrf_exempt
 def update_bot_motion(request):
     try:
         if request.method == 'POST':
