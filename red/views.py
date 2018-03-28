@@ -150,5 +150,5 @@ def change_bot_motion(request):
 @csrf_exempt
 def update_bot_motion(request):
     if request.method == 'POST':
-        data = json.loads(request.read())
+        data = json.loads(request.read().decode('utf-8'))
         return HttpResponse(BotMotion.create(data))

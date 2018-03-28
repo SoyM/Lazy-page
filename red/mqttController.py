@@ -2,6 +2,7 @@ import time
 import paho.mqtt.client as mqtt
 import json
 # import middleCh
+import requests
 
 HOST = "m13.cloudmqtt.com"
 PORT = 15873
@@ -21,6 +22,7 @@ class MqttController:
         self.client.connect(HOST, PORT)
         self.client.loop_forever()
 
+    @classmethod
     def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code " + str(rc))
         client.subscribe("test")
@@ -30,12 +32,15 @@ class MqttController:
         client.subscribe("bot_mode")
         client.publish("test", json.dumps({"user": USER, "say": "Hello,anyone!"}))
 
+    @classmethod
     def on_message(self, client, userdata, msg):
         print(msg.topic + " " + msg.payload.decode("utf-8"))
         if msg.topic == "bot_mode":
-            ch = json.loads(msg.payload.decode("utf-8"))['set_mode']
-            # middleCh.set_value("bot_mode", ch)
-            print(ch)
+            data = json.loads(msg.payload.decode("utf-8"))
+            bot_mode = data['bot_mode']
+            if bot_mode in ["up", "down", "left", "right", "auto", "wave"]:
+                r = requests.post('http://127.0.0.1:8000/update_bot_motion/', json={"bot_mode": bot_mode})
+                print(r.text)
 
     def send_message(self, topic, message):
         self.client.publish(topic, json.dumps(message))
