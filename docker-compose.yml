@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: .
+    depends_on:
+      - db
     command: python3 main.py
     volumes:
       - .:/usr/src/app
