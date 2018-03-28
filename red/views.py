@@ -8,8 +8,11 @@ from django.contrib.auth.decorators import login_required
 import os
 import json
 import markdown
+from .mqttController import MqttController
 from .models import DeviceMiLed, MachineParams, BotMotion
 from .forms import AccountForm, MachineParamsForm
+
+mqtt = MqttController()
 
 
 # @require_http_methods(["GET"])
@@ -138,8 +141,9 @@ def get_bot_motion(request):
 
 @csrf_exempt
 def change_bot_motion(request):
-    data = {'set_mode': request.GET['set_mode']}
-    print(request.GET['set_mode'] + "ss")
+    set_mode = request.GET['set_mode']
+    mqtt.client.publish("set_mode", json.dumps({"set_mode": set_mode}))
+    data = {'set_mode': set_mode}
     return HttpResponse(BotMotion.create(data))
 
 
@@ -148,4 +152,3 @@ def update_bot_motion(request):
     if request.method == 'POST':
         data = json.loads(request.read())
         return HttpResponse(BotMotion.create(data))
-
