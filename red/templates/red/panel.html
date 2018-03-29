@@ -88,12 +88,24 @@
             message.destinationName = "set_mode";
             client.send(message);
         }
+
+        function auto_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"auto"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
+
+        function wave_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"wave"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
             integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
             crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
-            integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+            integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
             crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
     <script>
@@ -393,6 +405,14 @@
                         </div>
                         <div id="motion_down" class="am-u-sm-8 am-u-sm-offset-4" onclick="down_mode()">
                             <i class="fas fa-arrow-alt-circle-down fa-5x"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="am-u-sm-3 am-u-sm-offset-2" onclick="auto_mode()">
+                            <i class="fab fa-adn fa-5x"></i>
+                        </div>
+                        <div class="am-u-sm-6" onclick="wave_mode()">
+                            <i class="fab fa-d-and-d fa-5x"></i>
                         </div>
                     </div>
                     <div class="row">
