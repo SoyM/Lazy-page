@@ -46,13 +46,14 @@
             console.log(message.destinationName + message.payloadString);
             if (message.destinationName === "bot_mode") {
                 try {
-                    var bot_mode = JSON.parse(message.payloadString).bot_mode;
+                    var data = JSON.parse(message.payloadString);
+                    var bot_mode = data.bot_mode;
                     var handle_array = new Array("up", "right", "left", "down", "auto", "wave");
                     for (var m = 0; m < handle_array.length; m++) {
                         $("#motion_" + handle_array[m]).css("color", "#C0C0C0");
                     }
                     $("#motion_" + bot_mode).css("color", "Tomato");
-                    {#$("#bot_motion_update_date").text(data.update_date);#}
+                    $("#bot_motion_update_date").text(data.update_date);
                 }
                 catch (err) {
                     console.log(err)
@@ -392,6 +393,11 @@
                         </div>
                         <div id="motion_down" class="am-u-sm-8 am-u-sm-offset-4" onclick="down_mode()">
                             <i class="fas fa-arrow-alt-circle-down fa-5x"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="am-u-sm-10 am-u-sm-offset-1">
+                            update date:&nbsp;&nbsp;&nbsp;&nbsp;<span id="bot_motion_update_date"></span>
                         </div>
                     </div>
                 </div>
