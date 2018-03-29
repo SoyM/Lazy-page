@@ -2,13 +2,99 @@
 {% block title %}Controller panel{% endblock %}
 {% load static %}
 {% block extrastyle %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
+            type="text/javascript"></script>
+    <script>
+        client = null;
+        connected = false;
+        connect();
+
+        function connect() {
+            client = new Paho.MQTT.Client("m13.cloudmqtt.com", Number(35873), "soym_web");
+            client.onConnectionLost = onConnectionLost;
+            client.onMessageArrived = onMessageArrived;
+            client.connect({
+                invocationContext: {host: "m13.cloudmqtt.com", port: Number(35873), path: "", clientId: "soym_web"},
+                userName: "lytlmnde",
+                password: "3mtD81MmaVqW",
+                useSSL: true,
+                mqttVersion: 4,
+                cleanSession: true,
+                onSuccess: onConnect
+            });
+
+        }
+
+        function onConnect() {
+            // Once a connection has been made, make a subscription and send a message.
+            console.log("onConnect");
+            client.subscribe("test");
+            client.subscribe("set_mode");
+            client.subscribe("bot_mode");
+            message = new Paho.MQTT.Message("Hello,I am soym_web");
+            message.destinationName = "test";
+            client.send(message);
+        }
+
+        // called when the client loses its connection
+        function onConnectionLost(responseObject) {
+            console.log("onConnectionLost:");
+        }
+
+        // called when a message arrives
+        function onMessageArrived(message) {
+            console.log(message.destinationName + message.payloadString);
+            if (message.destinationName === "bot_mode") {
+                try {
+                    var bot_mode = JSON.parse(message.payloadString).bot_mode;
+                    var handle_array = new Array("up", "right", "left", "down", "auto", "wave");
+                    for (var m = 0; m < handle_array.length; m++) {
+                        $("#motion_" + handle_array[m]).css("color", "#C0C0C0");
+                    }
+                    $("#motion_" + bot_mode).css("color", "Tomato");
+                    {#$("#bot_motion_update_date").text(data.update_date);#}
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+
+
+        /**
+         * MQTT Publish
+         */
+        function up_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"up"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
+
+        function down_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"down"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
+
+        function left_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"left"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
+
+        function right_mode() {
+            message = new Paho.MQTT.Message('{"set_mode":"right"}');
+            message.destinationName = "set_mode";
+            client.send(message);
+        }
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"
             integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
             crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
             integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
             crossorigin="anonymous"></script>
-    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
     <script>
 
         // Ajax队列
@@ -46,113 +132,9 @@
         }, 700);
     </script>
 
-    <script>
-        // Ajax队列
-        var runFlag = true;
-        var interrupt = false;
-        var interval = setInterval(function () {
-                // 未到合适时机发请求，跳过本次循环
-                if (!runFlag) {
-                    return;
-                }
-                // 强制中断标识，这将中断余下所有业务
-                if (interrupt) {
-                    clearInterval(interval);
-                    return;
-                }
-                // 开始请求
-                runFlag = false;
 
-                $.ajax({
-                    url: "/get_bot_motion/",
-                    type: 'get',
-                    data: {},
-                    dataType: 'json',
-                    success: function (data, textStatus, jqXHR) {
-                        console.log(data);
-                        var handle_array = ["up", "right", "left", "down"];
-                        var bot_mode = data.bot_mode;
-                        for (var i = 0; i < handle_array.length; i++) {
-                            if (handle_array[i] == bot_mode) {
-                                handle_array.splice(i, 1);
-                                break;
-                            }
-                        }
-                        for (var m = 0; m < handle_array.length; m++) {
-                            $("#motion_" + handle_array[m]).css("color", "#C0C0C0");
-                        }
-                        $("#motion_" + bot_mode).css("color", "Tomato");
-                        $("#bot_motion_update_date").text(data.update_date);
-                        runFlag = true;
-                    },
-                    error: function (xhr, textStatus) {
-                        console.log(xhr);
-                    }
-                });
-            },
-            300
-            )
-        ;
-    </script>
 
     <script>
-        function up_mode() {
-            $.ajax({
-                url: "/change_bot_motion",
-                type: 'get',
-                data: {
-                    set_mode: "up"
-                },
-                dataType: 'text',
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                }
-            })
-        }
-
-        function down_mode() {
-            $.ajax({
-                url: "/change_bot_motion",
-                type: 'get',
-                data: {
-                    set_mode: "down"
-                },
-                dataType: 'text',
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                }
-            })
-        }
-
-        function left_mode() {
-            $.ajax({
-                url: "/change_bot_motion",
-                type: 'get',
-                data: {
-                    set_mode: "left"
-                },
-                dataType: 'text',
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                }
-            })
-        }
-
-        function right_mode() {
-            $.ajax({
-                url: "/change_bot_motion",
-                type: 'get',
-                data: {
-                    set_mode: "right"
-                },
-                dataType: 'text',
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                }
-            })
-        }
-
-
         var pageData = {
             'index': function indexData() {
                 var echartsA = echarts.init(document.getElementById('tpl-echarts-A'));
