@@ -103,7 +103,7 @@ def panel(request):
 @csrf_exempt
 def update_status(request):
     if request.method == 'POST':
-        data = json.loads(request.read())
+        data = json.loads(request.read().decode('utf-8'))
         form = MachineParamsForm(data)
         if form.is_valid():
             return HttpResponse(MachineParams.create(data))
