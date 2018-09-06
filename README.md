@@ -2,7 +2,11 @@
 
 A web application for [foolbot](https://github.com/SoyM/foolbot) and [esp32bot](https://github.com/SoyM/Esp32bot)
 
-## Install
+## Usage
+* Install docker and docker-compose
+* run `docker-compose up`
+
+## Database
 
 ```bash
 python manage.py makemigrations red
